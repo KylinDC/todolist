@@ -3,3 +3,5 @@
 
 # ingore the tmp folder
 tmp/
+
+.vscode/
