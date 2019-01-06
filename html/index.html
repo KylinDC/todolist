@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>TodoList</title>
-</head>
-<body>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
 
-</body>
+  <body>
+    <div class="container">
+      <div class="header"><div class="title">TodoList</div></div>
+      <div class="add_todo">
+        <div class="todo_input">
+          <input type="text" placeholder="请输入要添加的事项，按回车添加…" />
+        </div>
+      </div>
+      <div class="todo_lists">
+        <div class="todo_item">
+          <div class="uncheck_icon"></div>
+          <div class="todo_content">你好啊</div>
+          <div class="delete_icon"></div>
+        </div>
+        <div class="todo_item">
+          <div class="checked_icon"></div>
+          <div class="todo_content done_content">你好啊aaaaaaaa</div>
+          <div class="delete_icon hidden"></div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="todo_counter">
+          Left items: <span id="left_items">90</span>
+        </div>
+        <div class="buttons">
+          <button id="active_button" class="button selected_button">
+            ACTIVE
+          </button>
+          <button id="completed_button" class="button">COMPLETED</button>
+          <button id="clear_button" class="button hidden">
+            Clear Completed
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
