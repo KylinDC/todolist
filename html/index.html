@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>TodoList</title>
     <link rel="stylesheet" href="../css/main.css" />
+    <script type="text/javascript" src="../js/main.js"></script>
   </head>
 
   <body>
@@ -27,17 +28,18 @@
         </div>
       </div>
       <div class="footer">
-        <div class="todo_counter">
-          Left items: <span id="left_items">90</span>
-        </div>
-        <div class="buttons">
-          <button id="active_button" class="button selected_button">
-            ACTIVE
-          </button>
-          <button id="completed_button" class="button">COMPLETED</button>
-          <button id="clear_button" class="button hidden">
+        <div class="items_info">
+          <div class="todo_counter">
+            Left items: <span id="left_items">90</span>
+          </div>
+          <button id="clear_button" class="clear_button">
             Clear Completed
           </button>
+        </div>
+        <div class="view_buttons">
+          <button id="all_button" class="button selected_button">ALL</button>
+          <button id="active_button" class="button">ACTIVE</button>
+          <button id="completed_button" class="button">COMPLETED</button>
         </div>
       </div>
     </div>
