@@ -1,9 +1,8 @@
 class TodoItem {
-  constructor(content) {
+  constructor(content, isCompleted = false, isDeleted = false) {
     this.content = content;
-    this.creatDate = new Date();
-    this.isCompleted = false;
-    this.isDeleted = false;
+    this.isCompleted = isCompleted;
+    this.isDeleted = isDeleted;
   }
 
   setCompleted() {
@@ -18,19 +17,11 @@ class TodoItem {
     this.isDeleted = true;
   }
 
-  // get todoItemJson() {
-  //   return {
-  //     creatDate: this.creatDate,
-  //     content: this.content,
-  //     isCompleted: this.isCompleted
-  //   };
-  // }
-
   generateItemHTML() {
     if (this.isCompleted) {
       return `<div class="todo_item">
       <div class="checked_icon"></div>
-      <div class="todo_content done_content">this.content</div>
+      <div class="todo_content done_content">${this.content}</div>
       <div class="delete_icon hidden"></div>
     </div>`;
     } else {
@@ -45,4 +36,4 @@ class TodoItem {
 
 // export default TodoItem;
 
-module.exports = TodoItem;
+// module.exports = TodoItem;
