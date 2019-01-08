@@ -29,3 +29,15 @@ function showTodoList(viewState = viewStateArr[0]) {
       break;
   }
 }
+
+function showItemsInfo() {
+  let leftCounter = document.getElementById("left_counter");
+  let clearButton = document.getElementById("clear_button");
+  let counter = itemStorage.getLeftCount();
+  leftCounter.innerText = counter;
+  if (counter > 0) {
+    clearButton.classList.remove("hidden");
+  } else {
+    clearButton.classList.add("hidden");
+  }
+}
