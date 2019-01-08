@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>TodoList</title>
     <link rel="stylesheet" href="../css/main.css" />
-    <script type="text/javascript" src="../js/main.js"></script>
   </head>
 
   <body>
@@ -15,33 +14,43 @@
           <input type="text" placeholder="请输入要添加的事项，按回车添加…" />
         </div>
       </div>
-      <div class="todo_lists">
-        <div class="todo_item">
-          <div class="uncheck_icon"></div>
-          <div class="todo_content">你好啊</div>
-          <div class="delete_icon"></div>
-        </div>
-        <div class="todo_item">
-          <div class="checked_icon"></div>
-          <div class="todo_content done_content">你好啊aaaaaaaa</div>
-          <div class="delete_icon hidden"></div>
-        </div>
-      </div>
+      <div class="todo_lists" id="todo_lists"></div>
       <div class="footer">
         <div class="items_info">
           <div class="todo_counter">
-            Left items: <span id="left_items">90</span>
+            Left items: <span id="left_counter"></span>
           </div>
-          <button id="clear_button" class="clear_button">
+          <button id="clear_button" class="clear_button hidden">
             Clear Completed
           </button>
         </div>
         <div class="view_buttons">
-          <button id="all_button" class="button selected_button">ALL</button>
-          <button id="active_button" class="button">ACTIVE</button>
-          <button id="completed_button" class="button">COMPLETED</button>
+          <button
+            id="all_button"
+            class="button selected_button"
+            onclick="showAllTodoList()"
+          >
+            ALL
+          </button>
+          <button
+            id="active_button"
+            class="button"
+            onclick="showActiveTodoList()"
+          >
+            ACTIVE
+          </button>
+          <button
+            id="completed_button"
+            class="button"
+            onclick="showCompletedTodoList()"
+          >
+            COMPLETED
+          </button>
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="../js/todo_item.js"></script>
+    <script type="text/javascript" src="../js/item_storage.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
   </body>
 </html>
