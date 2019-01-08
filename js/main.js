@@ -6,9 +6,13 @@ let viewStateArr = ["all", "active", "completed"];
 let viewState = viewStateArr[0];
 
 window.onload = () => {
+  refreshView();
+};
+
+function refreshView() {
   showAllTodoList();
   showItemsInfo();
-};
+}
 
 function showTodoList() {
   let todoListHTML = "";
@@ -40,6 +44,11 @@ function showItemsInfo() {
   } else {
     clearButton.classList.add("hidden");
   }
+}
+
+function clearCompleted() {
+  itemStorage.removeDoneItem();
+  refreshView();
 }
 
 function showAllTodoList() {
