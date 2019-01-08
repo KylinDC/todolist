@@ -46,6 +46,21 @@ function showItemsInfo() {
   }
 }
 
+function submitTodo(event) {
+  let todoInput = document.getElementById("todo_input");
+  let todoContent = todoInput.value;
+  if (event.keyCode === 13 && todoContent) {
+    addTodo(todoContent);
+    todoInput.value = "";
+  }
+}
+
+function addTodo(todoContent) {
+  let todoItem = new TodoItem(todoContent);
+  itemStorage.addItem(todoItem);
+  refreshView();
+}
+
 function clearCompleted() {
   itemStorage.removeDoneItem();
   refreshView();
