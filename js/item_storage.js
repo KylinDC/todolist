@@ -9,37 +9,35 @@ class ItemStorage {
     this.storage[todoItem.content] = JSON.stringify(todoItem);
   }
 
-  updateItem(todoItem) {
-    this.storage[todoItem.content] = JSON.stringify(todoItem);
-  }
-
-  updateItemStorage() {
-    for (let i = 1; i < this.storage.length; i++) {
-      let item = JSON.parse(this.storage.getItem(this.storage.key(i)));
-      if (item.isDeleted) {
-        this.storage.removeItem(this.storage.key(i));
-        i--;
-      }
-    }
-  }
-
   getAllItem() {
     let itemArr = [];
-    for (let i = 1; i < this.storage.length; i++) {
-      let item = JSON.parse(this.storage.getItem(this.storage.key(i)));
-      itemArr.push(item);
+    for (let i = 0; i < this.storage.length; i++) {
+      let item = this.storage.getItem(this.storage.key(i));
+      if (item.startsWith("{") && item.endsWith("}")) {
+        if (JSON.parse(item).content) {
+          let itemObject = JSON.parse(item);
+          let todoItem = new TodoItem(
+            itemObject.content,
+            itemObject.isCompleted,
+            itemObject.isDeleted
+          );
+          itemArr.push(todoItem);
+        }
+      }
     }
     return itemArr;
   }
 
-  deleteDoneItem() {
-    for (let i = 1; i < this.storage.length; i++) {
-      let item = JSON.parse(this.storage.getItem(this.storage.key(i)));
-      if (item.isCompleted) {
-        this.storage.removeItem(this.storage.key(i));
-        i--;
-      }
-    }
+  removeDeletedItem() {
+    let allItems = this.getAllItem();
+    let deletedItems = allItems.filter(e => e.isDeleted);
+    deletedItems.forEach(e => this.storage.removeItem(e.content));
+  }
+
+  removeDoneItem() {
+    let allItems = this.getAllItem();
+    let completedItems = allItems.filter(e => e.isCompleted);
+    completedItems.forEach(e => this.storage.removeItem(e.content));
   }
 
   getLeftCount() {
@@ -53,13 +51,29 @@ class ItemStorage {
     return leftCount;
   }
 
-  generateItemsHTML() {
+  generateAllItemsHTML() {
     let itemsHTML = "";
-    let items = getAllItem();
+    let items = this.getAllItem();
     items.forEach(e => (itemsHTML += e.generateItemHTML()));
+    return itemsHTML;
+  }
+
+  generateActiveItemsHTML() {
+    let itemsHTML = "";
+    let allItems = this.getAllItem();
+    let activeItems = allItems.filter(e => !e.isCompleted);
+    activeItems.forEach(e => (itemsHTML += e.generateItemHTML()));
+    return itemsHTML;
+  }
+
+  generateCompletedItemsHTML() {
+    let itemsHTML = "";
+    let allItems = this.getAllItem();
+    let completedItems = allItems.filter(e => e.isCompleted);
+    completedItems.forEach(e => (itemsHTML += e.generateItemHTML()));
     return itemsHTML;
   }
 }
 
 // export default ItemStorage;
-module.exports = ItemStorage;
+// module.exports = ItemStorage;
