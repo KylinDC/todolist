@@ -71,6 +71,14 @@ function deleteTodoItem(event) {
   refreshView();
 }
 
+function setTodoItemCompleted(event) {
+  let todoItemNode = event.target;
+  let todoItem = itemStorage.getItemByContent(todoItemNode.innerText);
+  todoItem.isCompleted = true;
+  itemStorage.addItem(todoItem);
+  refreshView();
+}
+
 function clearCompleted() {
   itemStorage.removeDoneItem();
   refreshView();
