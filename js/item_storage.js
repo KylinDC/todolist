@@ -1,5 +1,3 @@
-// let TodoItem = require("./todo_item");
-
 class ItemStorage {
   constructor() {
     this.storage = localStorage;
@@ -51,6 +49,11 @@ class ItemStorage {
     return leftCount;
   }
 
+  getItemByContent(content) {
+    let allItems = this.getAllItem();
+    return allItems.find(e => e.content === content);
+  }
+
   generateAllItemsHTML() {
     let itemsHTML = "";
     let items = this.getAllItem();
@@ -74,6 +77,3 @@ class ItemStorage {
     return itemsHTML;
   }
 }
-
-// export default ItemStorage;
-// module.exports = ItemStorage;

@@ -22,18 +22,14 @@ class TodoItem {
       return `<div class="todo_item">
       <div class="checked_icon"></div>
       <div class="todo_content done_content">${this.content}</div>
-      <div class="delete_icon hidden"></div>
+      <div class="delete_icon hidden" onclick="deleteTodoItem(event)"></div>
     </div>`;
     } else {
       return `<div class="todo_item">
       <div class="uncheck_icon"></div>
       <div class="todo_content">${this.content}</div>
-      <div class="delete_icon"></div>
+      <div class="delete_icon hidden" onclick="deleteTodoItem(event)"></div>
     </div>`;
     }
   }
 }
-
-// export default TodoItem;
-
-// module.exports = TodoItem;

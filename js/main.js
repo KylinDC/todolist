@@ -61,6 +61,16 @@ function addTodo(todoContent) {
   refreshView();
 }
 
+function deleteTodoItem(event) {
+  let parentNode = event.target.parentNode;
+  let contentNode = parentNode.querySelectorAll("div.todo_content")[0];
+  let todoItem = itemStorage.getItemByContent(contentNode.innerText);
+  todoItem.isDeleted = true;
+  itemStorage.addItem(todoItem);
+  itemStorage.removeDeletedItem();
+  refreshView();
+}
+
 function clearCompleted() {
   itemStorage.removeDoneItem();
   refreshView();
