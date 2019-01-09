@@ -10,7 +10,7 @@ window.onload = () => {
 };
 
 function refreshView() {
-  showAllTodoList();
+  showTodoList();
   showItemsInfo();
 }
 
@@ -63,7 +63,7 @@ function addTodo(todoContent) {
 
 function deleteTodoItem(event) {
   let parentNode = event.target.parentNode;
-  let contentNode = parentNode.querySelectorAll("div.todo_content")[0];
+  let contentNode = parentNode.getElementsByClassName("todo_content")[0];
   let todoItem = itemStorage.getItemByContent(contentNode.innerText);
   todoItem.isDeleted = true;
   itemStorage.addItem(todoItem);
