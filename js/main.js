@@ -68,13 +68,21 @@ function deleteTodoItem(event) {
   todoItem.isDeleted = true;
   todoItems.addItem(todoItem);
   todoItems.removeDeletedItem();
-  refreshView();
+  todoList.removeChild(parentNode);
 }
 
 function setTodoItemCompleted(event) {
   let todoItemNode = event.target;
   let todoItem = todoItems.getItemByContent(todoItemNode.innerText);
   todoItem.isCompleted = true;
+  todoItems.addItem(todoItem);
+  refreshView();
+}
+
+function setTodoItemUncompleted(event) {
+  let todoItemNode = event.target;
+  let todoItem = todoItems.getItemByContent(todoItemNode.innerText);
+  todoItem.isCompleted = false;
   todoItems.addItem(todoItem);
   refreshView();
 }
