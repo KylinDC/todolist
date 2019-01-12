@@ -14,7 +14,8 @@ function renderDeletedItem(parentNode) {
 
 function renderSetCompletedItem(target) {
   let parentNode = target.parentNode;
-  parentNode.setAttribute("onclick", "setTodoItemUncompleted(event)");
+
+  target.setAttribute("onclick", "setTodoItemUncompleted(event)");
 
   let checkIcon = parentNode.querySelector(".uncheck_icon");
   checkIcon.setAttribute("class", "checked_icon");
@@ -25,7 +26,7 @@ function renderSetCompletedItem(target) {
 
 function renderUndoCompletedItem(target) {
   let parentNode = target.parentNode;
-  parentNode.setAttribute("onclick", "setTodoItemCompleted(event)");
+  target.setAttribute("onclick", "setTodoItemCompleted(event)");
 
   let checkIcon = parentNode.querySelector(".checked_icon");
   checkIcon.setAttribute("class", "uncheck_icon");
