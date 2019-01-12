@@ -7,19 +7,27 @@ class TodoItem {
 
   generateItemHTML() {
     if (this.isCompleted) {
-      return `<div class="todo_item" ">
+      return `<li class="todo_item">
       <div class="checked_icon"></div>
-      <div class="todo_content done_content">${this.content}</div>
-      <div class="delete_icon hidden" onclick="deleteTodoItem(event)"></div>
-    </div>`;
-    } else {
-      return `<div class="todo_item">
-      <div class="uncheck_icon"></div>
-      <div class="todo_content" onclick="setTodoItemCompleted(event)"> ${
+      <span class="todo_content done_content" onclick="setTodoItemUncompleted(event)">${
         this.content
-      }</div>
-      <div class="delete_icon hidden" onclick="deleteTodoItem(event)"></div>
-    </div>`;
+      }</span>
+      <button
+        class="delete_icon hidden"
+        onclick="deleteTodoItem(event)"
+      ></button>
+    </li>`;
+    } else {
+      return `<li class="todo_item">
+      <div class="uncheck_icon"></div>
+      <span class="todo_content" onclick="setTodoItemCompleted(event)">${
+        this.content
+      }</span>
+      <button
+        class="delete_icon hidden"
+        onclick="deleteTodoItem(event)"
+      ></button>
+    </li>`;
     }
   }
 }
