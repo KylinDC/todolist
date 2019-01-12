@@ -1,48 +1,56 @@
-class ItemStorage {
+class TodoItems {
   constructor() {
-    this.storage = localStorage;
+    if (localStorage.itemsStorage) {
+      this.items = JSON.parse(localStorage.getItem("itemsStorage"));
+    } else {
+      this.items = {};
+    }
+  }
+
+  saveToStorage() {
+    localStorage.setItem("itemsStorage", JSON.stringify(this.items));
   }
 
   addItem(todoItem) {
-    this.storage[todoItem.content] = JSON.stringify(todoItem);
+    this.items[todoItem.content] = todoItem;
+    this.saveToStorage();
   }
 
   getAllItem() {
     let itemArr = [];
-    for (let i = 0; i < this.storage.length; i++) {
-      let item = this.storage.getItem(this.storage.key(i));
-      if (item.startsWith("{") && item.endsWith("}")) {
-        if (JSON.parse(item).content) {
-          let itemObject = JSON.parse(item);
-          let todoItem = new TodoItem(
-            itemObject.content,
-            itemObject.isCompleted,
-            itemObject.isDeleted
-          );
-          itemArr.push(todoItem);
-        }
-      }
+    for (let item of Object.values(this.items)) {
+      let todoItem = new TodoItem(
+        item.content,
+        item.isCompleted,
+        item.isDeleted
+      );
+      itemArr.push(todoItem);
     }
     return itemArr;
   }
 
   removeDeletedItem() {
-    let allItems = this.getAllItem();
-    let deletedItems = allItems.filter(e => e.isDeleted);
-    deletedItems.forEach(e => this.storage.removeItem(e.content));
+    for (let item in this.items) {
+      if (this.items[item].isDeleted) {
+        delete this.items[item];
+      }
+    }
+    this.saveToStorage();
   }
 
   removeDoneItem() {
-    let allItems = this.getAllItem();
-    let completedItems = allItems.filter(e => e.isCompleted);
-    completedItems.forEach(e => this.storage.removeItem(e.content));
+    for (let item in this.items) {
+      if (this.items[item].isCompleted) {
+        delete this.items[item];
+      }
+    }
+    this.saveToStorage();
   }
 
   getLeftCount() {
-    let items = this.getAllItem();
     let leftCount = 0;
-    for (let i of items) {
-      if (!i.isCompleted) {
+    for (let item in this.items) {
+      if (!this.items[item].isCompleted) {
         leftCount++;
       }
     }
