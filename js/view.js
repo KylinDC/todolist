@@ -90,3 +90,29 @@ function showItemsByViewState() {
       break;
   }
 }
+
+function changeButtonState() {
+  let allButton = document.getElementById("all_button");
+  let activeButton = document.getElementById("active_button");
+  let completedButton = document.getElementById("completed_button");
+
+  switch (viewState) {
+    case "all":
+      allButton.classList.add("selected_button");
+      activeButton.classList.remove("selected_button");
+      completedButton.classList.remove("selected_button");
+      break;
+    case "active":
+      allButton.classList.remove("selected_button");
+      activeButton.classList.add("selected_button");
+      completedButton.classList.remove("selected_button");
+      break;
+    case "completed":
+      allButton.classList.remove("selected_button");
+      activeButton.classList.remove("selected_button");
+      completedButton.classList.add("selected_button");
+      break;
+    default:
+      break;
+  }
+}
