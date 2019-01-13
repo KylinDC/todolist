@@ -57,14 +57,24 @@ class TodoItems {
     this.saveToStorage();
   }
 
-  getLeftCount() {
-    let leftCount = 0;
+  getActiveCount() {
+    let activeCount = 0;
     for (let item in this.items) {
       if (!this.items[item].isCompleted) {
-        leftCount++;
+        activeCount++;
       }
     }
-    return leftCount;
+    return activeCount;
+  }
+
+  getCompletedCount() {
+    let completedCount = 0;
+    for (let item in this.items) {
+      if (this.items[item].isCompleted) {
+        completedCount++;
+      }
+    }
+    return completedCount;
   }
 
   getItemByContent(content) {

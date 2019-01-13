@@ -31,18 +31,6 @@ function showTodoList() {
   itemsToRender.forEach(e => renderItem(e));
 }
 
-function showItemsInfo() {
-  let leftCounter = document.getElementById("left_counter");
-  let clearButton = document.getElementById("clear_button");
-  let counter = todoItems.getLeftCount();
-  leftCounter.innerText = counter;
-  if (counter > 0) {
-    clearButton.classList.remove("hidden");
-  } else {
-    clearButton.classList.add("hidden");
-  }
-}
-
 function submitTodo(event) {
   let todoInput = document.getElementById("todo_input");
   let todoContent = todoInput.value;
@@ -56,6 +44,8 @@ function addTodo(todoContent) {
   let todoItem = new TodoItem(todoContent);
   todoItems.addItem(todoItem);
   renderItem(todoItem);
+  showItemsByViewState();
+  showItemsInfo();
 }
 
 function deleteTodoItem(event) {
@@ -66,6 +56,7 @@ function deleteTodoItem(event) {
   todoItems.addItem(todoItem);
   todoItems.removeDeletedItem();
   renderDeletedItem(parentNode);
+  showItemsInfo();
 }
 
 function setTodoItemCompleted(event) {
@@ -74,6 +65,7 @@ function setTodoItemCompleted(event) {
   todoItem.isCompleted = true;
   todoItems.addItem(todoItem);
   renderSetCompletedItem(todoItemNode);
+  showItemsInfo();
 }
 
 function setTodoItemActive(event) {
@@ -82,6 +74,7 @@ function setTodoItemActive(event) {
   todoItem.isCompleted = false;
   todoItems.addItem(todoItem);
   renderUndoCompletedItem(todoItemNode);
+  showItemsInfo();
 }
 
 function clearCompleted() {
@@ -92,19 +85,22 @@ function clearCompleted() {
 function showAllTodoList() {
   viewState = viewStateArr[0];
   changeButtonState();
-  showTodoList();
+  showItemsByViewState();
+  showItemsInfo();
 }
 
 function showActiveTodoList() {
   viewState = viewStateArr[1];
   changeButtonState();
-  showTodoList();
+  showItemsByViewState();
+  showItemsInfo();
 }
 
 function showCompletedTodoList() {
   viewState = viewStateArr[2];
   changeButtonState();
-  showTodoList();
+  showItemsByViewState();
+  showItemsInfo();
 }
 
 function changeButtonState() {

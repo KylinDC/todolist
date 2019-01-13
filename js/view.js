@@ -26,6 +26,7 @@ function renderSetCompletedItem(target) {
   let parentNode = target.parentNode;
 
   target.setAttribute("onclick", "setTodoItemActive(event)");
+  parentNode.classList.add("done_item");
 
   let checkIcon = parentNode.querySelector(".uncheck_icon");
   checkIcon.setAttribute("class", "checked_icon");
@@ -37,10 +38,47 @@ function renderSetCompletedItem(target) {
 function renderUndoCompletedItem(target) {
   let parentNode = target.parentNode;
   target.setAttribute("onclick", "setTodoItemCompleted(event)");
-
+  parentNode.classList.remove("done_item");
   let checkIcon = parentNode.querySelector(".checked_icon");
   checkIcon.setAttribute("class", "uncheck_icon");
 
   let content = parentNode.querySelector(".todo_content");
   content.classList.remove("done_content");
+}
+
+function showItemsInfo() {
+  let leftCounter = document.getElementById("left_counter");
+  let clearButton = document.getElementById("clear_button");
+  let activeCounter = todoItems.getActiveCount();
+  leftCounter.innerText = activeCounter;
+  if (todoItems.getCompletedCount() > 0 && !(viewState === "active")) {
+    clearButton.classList.remove("hidden");
+  } else {
+    clearButton.classList.add("hidden");
+  }
+}
+
+function showItemsByViewState() {
+  let todoItemElements = Array.from(todoList.querySelectorAll(".todo_item"));
+  let completeItemElements = todoItemElements.filter(e =>
+    e.classList.contains("done_item")
+  );
+  let activeItemElements = todoItemElements.filter(
+    e => !e.classList.contains("done_item")
+  );
+  switch (viewState) {
+    case "all":
+      todoItemElements.forEach(e => e.classList.remove("conceal"));
+      break;
+    case "active":
+      activeItemElements.forEach(e => e.classList.remove("conceal"));
+      completeItemElements.forEach(e => e.classList.add("conceal"));
+      break;
+    case "completed":
+      completeItemElements.forEach(e => e.classList.remove("conceal"));
+      activeItemElements.forEach(e => e.classList.add("conceal"));
+      break;
+    default:
+      break;
+  }
 }
