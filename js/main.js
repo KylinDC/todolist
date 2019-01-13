@@ -4,31 +4,12 @@ let viewStateArr = ["all", "active", "completed"];
 let viewState = viewStateArr[0];
 
 window.onload = () => {
-  refreshView();
+  showAllItem();
+  showItemsInfo();
 };
 
-function refreshView() {
-  showTodoList();
-  showItemsInfo();
-}
-
-function showTodoList() {
-  cleanTodoList();
-  let itemsToRender = [];
-  switch (viewState) {
-    case "all":
-      itemsToRender = todoItems.getAllItem();
-      break;
-    case "active":
-      itemsToRender = todoItems.getActiveItem();
-      break;
-    case "completed":
-      itemsToRender = todoItems.getCompletedItem();
-      break;
-    default:
-      break;
-  }
-  itemsToRender.forEach(e => renderItem(e));
+function showAllItem() {
+  todoItems.getAllItem().forEach(e => renderItem(e));
 }
 
 function submitTodo(event) {
@@ -77,8 +58,14 @@ function setTodoItemActive(event) {
   showItemsInfo();
 }
 
+function refreshView() {
+  showItemsByViewState();
+  showItemsInfo();
+}
+
 function clearCompleted() {
   todoItems.removeDoneItem();
+  renderClearCompletedItem();
   refreshView();
 }
 

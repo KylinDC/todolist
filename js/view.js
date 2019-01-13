@@ -58,6 +58,14 @@ function showItemsInfo() {
   }
 }
 
+function renderClearCompletedItem() {
+  let todoItemElements = Array.from(todoList.querySelectorAll(".todo_item"));
+  let completeItemElements = todoItemElements.filter(e =>
+    e.classList.contains("done_item")
+  );
+  completeItemElements.forEach(e => todoList.removeChild(e));
+}
+
 function showItemsByViewState() {
   let todoItemElements = Array.from(todoList.querySelectorAll(".todo_item"));
   let completeItemElements = todoItemElements.filter(e =>
