@@ -13,26 +13,22 @@ function refreshView() {
 }
 
 function showTodoList() {
-  let todoListHTML = "";
+  cleanTodoList();
+  let itemsToRender = [];
   switch (viewState) {
     case "all":
-      // todoListHTML = todoItems.generateAllItemsHTML();
-      // todoList.innerHTML = todoListHTML;
-      todoItems.getAllItem().forEach(e => {
-        renderItem(e);
-      });
+      itemsToRender = todoItems.getAllItem();
       break;
     case "active":
-      todoListHTML = todoItems.generateActiveItemsHTML();
-      todoList.innerHTML = todoListHTML;
+      itemsToRender = todoItems.getActiveItem();
       break;
     case "completed":
-      todoListHTML = todoItems.generateCompletedItemsHTML();
-      todoList.innerHTML = todoListHTML;
+      itemsToRender = todoItems.getCompletedItem();
       break;
     default:
       break;
   }
+  itemsToRender.forEach(e => renderItem(e));
 }
 
 function showItemsInfo() {
@@ -58,9 +54,8 @@ function submitTodo(event) {
 
 function addTodo(todoContent) {
   let todoItem = new TodoItem(todoContent);
-  renderItem(todoItem);
   todoItems.addItem(todoItem);
-  // refreshView();
+  renderItem(todoItem);
 }
 
 function deleteTodoItem(event) {
@@ -79,16 +74,14 @@ function setTodoItemCompleted(event) {
   todoItem.isCompleted = true;
   todoItems.addItem(todoItem);
   renderSetCompletedItem(todoItemNode);
-  // refreshView();
 }
 
-function setTodoItemUncompleted(event) {
+function setTodoItemActive(event) {
   let todoItemNode = event.target;
   let todoItem = todoItems.getItemByContent(todoItemNode.innerText);
   todoItem.isCompleted = false;
   todoItems.addItem(todoItem);
   renderUndoCompletedItem(todoItemNode);
-  // refreshView();
 }
 
 function clearCompleted() {

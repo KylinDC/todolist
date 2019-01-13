@@ -29,6 +29,16 @@ class TodoItems {
     return itemArr;
   }
 
+  getCompletedItem() {
+    let itemArr = this.getAllItem();
+    return itemArr.filter(e => e.isCompleted);
+  }
+
+  getActiveItem() {
+    let itemArr = this.getAllItem();
+    return itemArr.filter(e => !e.isCompleted);
+  }
+
   removeDeletedItem() {
     for (let item in this.items) {
       if (this.items[item].isDeleted) {
@@ -62,26 +72,26 @@ class TodoItems {
     return allItems.find(e => e.content === content);
   }
 
-  generateAllItemsHTML() {
-    let itemsHTML = "";
-    let items = this.getAllItem();
-    items.forEach(e => (itemsHTML += e.generateItemHTML()));
-    return itemsHTML;
-  }
+  // generateAllItemsHTML() {
+  //   let itemsHTML = "";
+  //   let items = this.getAllItem();
+  //   items.forEach(e => (itemsHTML += e.generateItemHTML()));
+  //   return itemsHTML;
+  // }
 
-  generateActiveItemsHTML() {
-    let itemsHTML = "";
-    let allItems = this.getAllItem();
-    let activeItems = allItems.filter(e => !e.isCompleted);
-    activeItems.forEach(e => (itemsHTML += e.generateItemHTML()));
-    return itemsHTML;
-  }
+  // generateActiveItemsHTML() {
+  //   let itemsHTML = "";
+  //   let allItems = this.getAllItem();
+  //   let activeItems = allItems.filter(e => !e.isCompleted);
+  //   activeItems.forEach(e => (itemsHTML += e.generateItemHTML()));
+  //   return itemsHTML;
+  // }
 
-  generateCompletedItemsHTML() {
-    let itemsHTML = "";
-    let allItems = this.getAllItem();
-    let completedItems = allItems.filter(e => e.isCompleted);
-    completedItems.forEach(e => (itemsHTML += e.generateItemHTML()));
-    return itemsHTML;
-  }
+  // generateCompletedItemsHTML() {
+  //   let itemsHTML = "";
+  //   let allItems = this.getAllItem();
+  //   let completedItems = allItems.filter(e => e.isCompleted);
+  //   completedItems.forEach(e => (itemsHTML += e.generateItemHTML()));
+  //   return itemsHTML;
+  // }
 }

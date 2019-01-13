@@ -21,12 +21,24 @@
         </div>
       </div>
       <ul class="todo_lists" id="todo_lists">
-        <template id="uncompleted_item_template">
+        <template id="active_item_template">
           <li class="todo_item">
             <div class="uncheck_icon"></div>
             <span
               class="todo_content"
               onclick="setTodoItemCompleted(event)"
+            ></span>
+            <button
+              class="delete_icon hidden"
+              onclick="deleteTodoItem(event)"
+            ></button></li
+        ></template>
+        <template id="completed_item_template">
+          <li class="todo_item">
+            <div class="checked_icon"></div>
+            <span
+              class="todo_content done_content"
+              onclick="setTodoItemActive(event)"
             ></span>
             <button
               class="delete_icon hidden"
